@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package gen;
+
+option go_package = "github.com/phuthien0308/ordering-base/simplelb/test/server/gen;gen";
+
+service HelloService {
+    rpc Hello (HelloRequest) returns (HelloResponse) {};
+    rpc HelloStream(HelloRequest) returns(stream HelloResponse){};
+}
+
+message HelloRequest{
+    string hello = 1;
+}
+
+message HelloResponse {
+    string response = 2;
+}

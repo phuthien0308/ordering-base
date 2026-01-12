@@ -1,0 +1,35 @@
+syntax="proto3";
+
+option go_package="github.com/phuthien0308/ordering-base/contracts/gen/config;config";
+
+message ConfigRequest {
+    string path = 1;
+}
+
+message ConfigResponse {
+    string data = 1;
+}
+
+message RegisterRequest {
+    string appname = 1;
+    string ip = 2;
+}
+
+message RegisterResponse {    
+}
+
+message DeregisterRequest {
+    string appname = 1;
+    string ip = 2;
+}
+
+message DeregisterResponse {
+
+}
+
+message GetAllAddressesRequest {
+    string appname = 1;
+}
+message GetAllAddressesResponse {
+    repeated string Ips = 1;
+}
