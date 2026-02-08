@@ -1,0 +1,22 @@
+syntax="proto3";
+
+option go_package = "./;pb";
+
+import "google/protobuf/empty.proto";
+import "account/address.proto";
+
+
+service AccountService {
+    rpc CreateAccount(CreatedAccountRequest) returns (CreatedAccountResponse){}    
+}
+
+message CreatedAccountRequest {    
+    string name = 1;
+    repeated Address address = 2;
+}
+
+message CreatedAccountResponse {    
+    string accountId = 1;
+}
+
+
