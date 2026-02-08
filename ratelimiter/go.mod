@@ -10,9 +10,13 @@ require (
 )
 
 require (
-	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/onsi/gomega v1.38.2 // indirect
+	github.com/stretchr/testify v1.11.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/sys v0.39.0 // indirect
 )
 
 replace github.com/phuthien0308/ordering-base/simplelog => ../simplelog
