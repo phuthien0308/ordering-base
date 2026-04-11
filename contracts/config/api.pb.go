@@ -30,7 +30,7 @@ const file_config_api_proto_rawDesc = "" +
 	"\bRegister\x12\x10.RegisterRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
 	"\n" +
 	"Deregister\x12\x12.DeregisterRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
-	"\x0fGetAllAddresses\x12\x17.GetAllAddressesRequest\x1a\x18.GetAllAddressesResponse\"\x00BCZAgithub.com/phuthien0308/ordering-base/contracts/gen/config;configb\x06proto3"
+	"\x0fGetAllAddresses\x12\x17.GetAllAddressesRequest\x1a\x18.GetAllAddressesResponse\"\x00B?Z=github.com/phuthien0308/ordering-base/contracts/config;configb\x06proto3"
 
 var file_config_api_proto_goTypes = []any{
 	(*RegisterRequest)(nil),         // 0: RegisterRequest

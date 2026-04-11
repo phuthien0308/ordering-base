@@ -1,4 +1,4 @@
-module github.com/phuthien0308/ordering-base/contracts/gen/account
+module github.com/phuthien0308/ordering-base/contracts/account
 
 go 1.25.5
 

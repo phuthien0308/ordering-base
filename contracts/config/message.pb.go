@@ -393,7 +393,7 @@ const file_config_message_proto_rawDesc = "" +
 	"\x16GetAllAddressesRequest\x12\x18\n" +
 	"\aappname\x18\x01 \x01(\tR\aappname\"+\n" +
 	"\x17GetAllAddressesResponse\x12\x10\n" +
-	"\x03Ips\x18\x01 \x03(\tR\x03IpsBCZAgithub.com/phuthien0308/ordering-base/contracts/gen/config;configb\x06proto3"
+	"\x03Ips\x18\x01 \x03(\tR\x03IpsB?Z=github.com/phuthien0308/ordering-base/contracts/config;configb\x06proto3"
 
 var (
 	file_config_message_proto_rawDescOnce sync.Once

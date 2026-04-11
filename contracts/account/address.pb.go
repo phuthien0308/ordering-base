@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: account/address.proto
 
-package pb
+package account
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -81,7 +81,7 @@ const file_account_address_proto_rawDesc = "" +
 	"\x15account/address.proto\x1a\x1bgoogle/protobuf/empty.proto\"A\n" +
 	"\aAddress\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1c\n" +
-	"\tisPrimary\x18\x02 \x01(\bR\tisPrimaryB\aZ\x05./;pbb\x06proto3"
+	"\tisPrimary\x18\x02 \x01(\bR\tisPrimaryBAZ?github.com/phuthien0308/ordering-base/contracts/account;accountb\x06proto3"
 
 var (
 	file_account_address_proto_rawDescOnce sync.Once

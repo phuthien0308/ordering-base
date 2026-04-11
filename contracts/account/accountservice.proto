@@ -1,6 +1,6 @@
 syntax="proto3";
 
-option go_package = "./;pb";
+option go_package = "github.com/phuthien0308/ordering-base/contracts/account;account";
 
 import "google/protobuf/empty.proto";
 import "account/address.proto";

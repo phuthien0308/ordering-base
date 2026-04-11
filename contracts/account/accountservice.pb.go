@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: account/accountservice.proto
 
-package pb
+package account
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -129,7 +129,7 @@ const file_account_accountservice_proto_rawDesc = "" +
 	"\x16CreatedAccountResponse\x12\x1c\n" +
 	"\taccountId\x18\x01 \x01(\tR\taccountId2T\n" +
 	"\x0eAccountService\x12B\n" +
-	"\rCreateAccount\x12\x16.CreatedAccountRequest\x1a\x17.CreatedAccountResponse\"\x00B\aZ\x05./;pbb\x06proto3"
+	"\rCreateAccount\x12\x16.CreatedAccountRequest\x1a\x17.CreatedAccountResponse\"\x00BAZ?github.com/phuthien0308/ordering-base/contracts/account;accountb\x06proto3"
 
 var (
 	file_account_accountservice_proto_rawDescOnce sync.Once
