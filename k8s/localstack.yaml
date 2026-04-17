@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localstack
+  labels:
+    app: localstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localstack
+  template:
+    metadata:
+      labels:
+        app: localstack
+    spec:
+      containers:
+      - name: localstack
+        image: localstack/localstack:latest
+        ports:
+        - containerPort: 4566
+        env:
+        - name: SERVICES
+          value: "dynamodb,opensearch,s3"
+        - name: DEFAULT_REGION
+          value: "us-east-1"
+        - name: AWS_ACCESS_KEY_ID
+          value: "test"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "test"
+        - name: LOCALSTACK_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: localstack-auth
+              key: token
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: localstack
+spec:
+  type: LoadBalancer # Exposes 4566 to your Mac host so Terraform still works!
+  selector:
+    app: localstack
+  ports:
+  - port: 4566
+    targetPort: 4566

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productservice
+  labels:
+    app: productservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productservice
+  template:
+    metadata:
+      labels:
+        app: productservice
+    spec:
+      containers:
+      - name: productservice
+        image: productservice:latest
+        imagePullPolicy: Never # Tells k8s to use your local Docker Desktop image
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DYNAMODB_ENDPOINT
+          value: "http://localstack:4566" # DNS name of the localstack service inside k8s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: productservice
+spec:
+  type: ClusterIP # Internal only
+  selector:
+    app: productservice
+  ports:
+  - port: 5000
+    targetPort: 5000

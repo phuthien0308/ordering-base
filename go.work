@@ -1,0 +1,13 @@
+go 1.25.5
+
+use (
+	./contracts/account
+	./contracts/config
+	./contracts/product
+	./grpc
+	./ratelimiter
+	./simplelb
+	./simplelog
+	./tools/daogen
+	./tracing
+)

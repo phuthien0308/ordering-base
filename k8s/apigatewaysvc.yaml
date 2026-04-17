@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigatewaysvc
+  labels:
+    app: apigatewaysvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigatewaysvc
+  template:
+    metadata:
+      labels:
+        app: apigatewaysvc
+    spec:
+      containers:
+      - name: apigatewaysvc
+        image: apigatewaysvc:latest
+        imagePullPolicy: Never # Tells k8s to use your local Docker Desktop image
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PRODUCT_SERVICE_ADDR
+          value: "productservice:5000" # DNS name of the productservice inside k8s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigatewaysvc
+spec:
+  type: LoadBalancer # Exposes 8080 to your Mac host
+  selector:
+    app: apigatewaysvc
+  ports:
+  - port: 8080
+    targetPort: 8080
