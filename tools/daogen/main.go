@@ -12,11 +12,11 @@ import (
 	"go.uber.org/zap"
 )
 
-var logger *simplelog.SimpleZapLogger
+var logger *simplelog.SimpleLogger
 
 func init() {
 	zapLog, _ := zap.NewDevelopment()
-	logger = simplelog.NewSimpleZapLogger(zapLog)
+	logger = simplelog.NewSimpleLogger(zapLog)
 }
 
 func main() {

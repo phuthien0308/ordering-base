@@ -27,7 +27,7 @@ func (m *MockAddressPuller) Pull(ctx context.Context, serviceName string) ([]Add
 }
 
 func TestSimpleLB(t *testing.T) {
-	logger := simplelog.NewSimpleZapLogger(zap.NewNop())
+	logger := simplelog.NewSimpleLogger(zap.NewNop())
 	mockAddressPuller := &MockAddressPuller{}
 	simpleLbBuilder := NewSimpleLBBuilder(logger, mockAddressPuller, 0)
 	_, err := simpleLbBuilder.Build(resolver.Target{URL: url.URL{Host: "test-service"}}, nil, resolver.BuildOptions{})
@@ -43,7 +43,7 @@ func (p *DynamicPuller) Pull(ctx context.Context, serviceName string) ([]Address
 }
 
 func TestSimpleLBRun(t *testing.T) {
-	logger := simplelog.NewSimpleZapLogger(zap.NewNop())
+	logger := simplelog.NewSimpleLogger(zap.NewNop())
 	puller := &DynamicPuller{}
 	simpleLbBuilder := NewSimpleLBBuilder(logger, puller, 10*time.Millisecond)
 	mockClientConn := &MockClientConn{}

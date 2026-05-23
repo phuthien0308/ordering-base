@@ -14,7 +14,7 @@ import (
 
 var watcherScheme = "simplelb_watcher"
 
-func RegisterWatcher(logger *simplelog.SimpleZapLogger, watcher AddressWatcher, interval time.Duration) {
+func RegisterWatcher(logger *simplelog.SimpleLogger, watcher AddressWatcher, interval time.Duration) {
 	resolver.Register(&SimpleLBWatcherBuilder{watcher: watcher, interval: interval, logger: logger})
 }
 
@@ -26,7 +26,7 @@ type AddressWatcher interface {
 type SimpleLBWatcherBuilder struct {
 	watcher  AddressWatcher
 	interval time.Duration
-	logger   *simplelog.SimpleZapLogger
+	logger   *simplelog.SimpleLogger
 }
 
 // Build implements [resolver.Builder].
@@ -74,7 +74,7 @@ type simpleLBWatcherResolver struct {
 	watcher     AddressWatcher
 	lastAddress []Address
 	interval    time.Duration
-	logger      *simplelog.SimpleZapLogger
+	logger      *simplelog.SimpleLogger
 }
 
 // Close implements [resolver.Resolver].

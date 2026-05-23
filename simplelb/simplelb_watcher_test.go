@@ -63,7 +63,7 @@ func TestSimpleLBWatcherBuilder_Scheme(t *testing.T) {
 }
 
 func TestSimpleLBWatcherBuilder_Build_Error(t *testing.T) {
-	logger := simplelog.NewSimpleZapLogger(zap.NewNop())
+	logger := simplelog.NewSimpleLogger(zap.NewNop())
 	b := &SimpleLBWatcherBuilder{logger: logger}
 
 	// Target with empty host
@@ -77,7 +77,7 @@ func TestSimpleLBWatcherBuilder_Build_Error(t *testing.T) {
 
 func TestSimpleLBWatcherBuilder_Build_Success_And_Run(t *testing.T) {
 	// This test integrates Build and the running of the resolver logic
-	logger := simplelog.NewSimpleZapLogger(zap.NewNop())
+	logger := simplelog.NewSimpleLogger(zap.NewNop())
 	mockWatcher := new(MockAddressWatcher)
 	mockCC := new(MockClientConn)
 	interval := time.Millisecond * 10
@@ -148,7 +148,7 @@ func TestSimpleLBWatcherBuilder_Build_Success_And_Run(t *testing.T) {
 }
 
 func TestSimpleLBWatcherResolver_WatchError(t *testing.T) {
-	logger := simplelog.NewSimpleZapLogger(zap.NewNop())
+	logger := simplelog.NewSimpleLogger(zap.NewNop())
 	mockWatcher := new(MockAddressWatcher)
 	mockCC := new(MockClientConn)
 	interval := time.Millisecond * 10

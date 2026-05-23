@@ -20,7 +20,7 @@ var exampleServiceName = "sampleserver"
 
 func main() {
 	zapLogger, _ := zap.NewDevelopment()
-	simplelb.Register(&simplelog.SimpleZapLogger{Logger: zapLogger}, &samplePuller{}, 10*time.Second)
+	simplelb.Register(&simplelog.SimpleLogger{Logger: zapLogger}, &samplePuller{}, 10*time.Second)
 
 	address := fmt.Sprintf("%s://%s", exampleScheme, exampleServiceName)
 

@@ -14,11 +14,11 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-func Register(logger *simplelog.SimpleZapLogger, puller AddressPuller, interval time.Duration) {
+func Register(logger *simplelog.SimpleLogger, puller AddressPuller, interval time.Duration) {
 	resolver.Register(&SimpleLBBuilder{puller: puller, interval: interval, logger: logger})
 }
 
-func NewSimpleLBBuilder(logger *simplelog.SimpleZapLogger, puller AddressPuller, interval time.Duration) *SimpleLBBuilder {
+func NewSimpleLBBuilder(logger *simplelog.SimpleLogger, puller AddressPuller, interval time.Duration) *SimpleLBBuilder {
 	return &SimpleLBBuilder{puller: puller, interval: interval, logger: logger}
 }
 
@@ -43,7 +43,7 @@ var scheme = "simplelb"
 type SimpleLBBuilder struct {
 	puller   AddressPuller
 	interval time.Duration
-	logger   *simplelog.SimpleZapLogger
+	logger   *simplelog.SimpleLogger
 }
 
 // Build implements [resolver.Builder].
@@ -91,7 +91,7 @@ type simpleLBResolver struct {
 	puller      AddressPuller
 	lastAddress []Address
 	interval    time.Duration
-	logger      *simplelog.SimpleZapLogger
+	logger      *simplelog.SimpleLogger
 }
 
 // Close implements [resolver.Resolver].

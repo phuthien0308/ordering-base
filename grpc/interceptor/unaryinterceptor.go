@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func RequestInterceptor(logger *simplelog.SimpleZapLogger, env string) grpc.UnaryServerInterceptor {
+func RequestInterceptor(logger *simplelog.SimpleLogger, env string) grpc.UnaryServerInterceptor {
 
 	return func(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		start := time.Now()
