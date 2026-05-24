@@ -10,4 +10,5 @@ use (
 	./simplelog
 	./tools/daogen
 	./tracing
+	./retry
 )

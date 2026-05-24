@@ -14,16 +14,16 @@ func TestRedisTokenBucket(t *testing.T) {
 	ctx := context.Background()
 	key := "test-limiter"
 	rate := 10.0
-	capacity := 5.0
+	burts := 5.0
 
 	rtb := NewRedisTokenBucket(&simplelog.SimpleLogger{Logger: zap.NewNop()}, "ClientID", db)
-	rtb.AddRule(key, rate, capacity)
+	rtb.AddRule(key, rate, burts)
 
 	now := 1705000000.0
 	rtb.clockInSecond = func() float64 { return now }
 
 	// Mock for the first call (initial state)
-	mock.ExpectEvalSha(tokenBucketScript.Hash(), []string{key + ":" + "ClientID"}, now, rate, capacity).SetVal(int64(1))
+	mock.ExpectEvalSha(tokenBucketScript.Hash(), []string{key + ":" + "ClientID"}, now, rate, burts).SetVal(int64(1))
 
 	allowed, err := rtb.Allow(ctx, key)
 	if err != nil {

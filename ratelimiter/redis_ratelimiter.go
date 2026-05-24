@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"strings"
-	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/phuthien0308/ordering-base/simplelog"
@@ -24,21 +23,7 @@ type RedisTokenBucket struct {
 type KeyCapacity struct {
 	Key          string
 	RateInSecond float64
-	Capacity     float64
-}
-
-// NewRedisTokenBucket creates a new Redis-based rate limiter.
-func NewRedisTokenBucket(logger *simplelog.SimpleLogger, clientID string, client *redis.Client) *RedisTokenBucket {
-	ratelimit := &RedisTokenBucket{
-		logger:   logger,
-		client:   client,
-		ClientID: clientID,
-		clockInSecond: func() float64 {
-			return float64(time.Now().UnixNano()) / 1e9
-		},
-	}
-
-	return ratelimit
+	Burts        float64
 }
 
 // Lua script for atomic Token Bucket logic in Redis.
@@ -50,7 +35,7 @@ var tokenBucketScript = redis.NewScript(`
 local key = KEYS[1]
 local now = tonumber(ARGV[1])
 local rate = tonumber(ARGV[2])
-local capacity = tonumber(ARGV[3])
+local burts = tonumber(ARGV[3])
 
 -- 1. Load data from Redis Hash
 local data = redis.call('HMGET', key, 'tokens', 'last_refill')
@@ -59,14 +44,14 @@ local last_refill = tonumber(data[2])
 
 -- 2. Initial state if key doesn't exist
 if tokens == nil then
-    tokens = capacity
+    tokens = burts
     last_refill = now
 end
 
 -- 3. Calculate refill
 local elapsed = math.max(0, now - last_refill)
 local refill = elapsed * rate
-tokens = math.min(capacity, tokens + refill)
+tokens = math.min(burts, tokens + refill)
 
 -- 4. Check and consume
 local allowed = 0
@@ -100,7 +85,7 @@ func (rtb *RedisTokenBucket) Allow(ctx context.Context, key string) (bool, error
 
 	now := rtb.clockInSecond()
 
-	result, err := tokenBucketScript.Run(ctx, rtb.client, []string{redisKey}, now, keyCap.RateInSecond, keyCap.Capacity).Result()
+	result, err := tokenBucketScript.Run(ctx, rtb.client, []string{redisKey}, now, keyCap.RateInSecond, keyCap.Burts).Result()
 	if err != nil {
 		return false, err
 	}
@@ -109,14 +94,14 @@ func (rtb *RedisTokenBucket) Allow(ctx context.Context, key string) (bool, error
 }
 
 // AddRule registers a new rate limit configuration for a specific key.
-func (rtb *RedisTokenBucket) AddRule(key string, rate float64, capacity float64) {
+func (rtb *RedisTokenBucket) AddRule(key string, rate float64, burts float64) {
 	if rtb.Keys == nil {
 		rtb.Keys = make(map[string]KeyCapacity)
 	}
 	rtb.Keys[key] = KeyCapacity{
 		Key:          key,
 		RateInSecond: rate,
-		Capacity:     capacity,
+		Burts:        burts,
 	}
 }
 
