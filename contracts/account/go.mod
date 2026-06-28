@@ -1,6 +1,6 @@
 module github.com/phuthien0308/ordering-base/contracts/account
 
-go 1.25.8
+go 1.25.5
 
 require (
 	google.golang.org/grpc v1.81.1
