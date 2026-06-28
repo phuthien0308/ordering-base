@@ -1,4 +1,4 @@
-go 1.25.5
+go 1.25.8
 
 use (
 	./contracts/account
@@ -6,9 +6,9 @@ use (
 	./contracts/product
 	./grpc
 	./ratelimiter
+	./retry
 	./simplelb
 	./simplelog
 	./tools/daogen
 	./tracing
-	./retry
 )
