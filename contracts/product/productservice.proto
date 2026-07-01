@@ -107,6 +107,5 @@ message GetProductUploadUrlsRequest{
     repeated ProductImage Files = 1;
 }
 message GetProductUploadUrlsResponse{
-    repeated string Urls = 1;
-    Error ErrorMsg = 2;
+    repeated string Urls = 1;    
 }

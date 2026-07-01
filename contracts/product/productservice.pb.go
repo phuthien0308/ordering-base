@@ -864,7 +864,6 @@ func (x *GetProductUploadUrlsRequest) GetFiles() []*ProductImage {
 type GetProductUploadUrlsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Urls          []string               `protobuf:"bytes,1,rep,name=Urls,proto3" json:"Urls,omitempty"`
-	ErrorMsg      *Error                 `protobuf:"bytes,2,opt,name=ErrorMsg,proto3" json:"ErrorMsg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -902,13 +901,6 @@ func (*GetProductUploadUrlsResponse) Descriptor() ([]byte, []int) {
 func (x *GetProductUploadUrlsResponse) GetUrls() []string {
 	if x != nil {
 		return x.Urls
-	}
-	return nil
-}
-
-func (x *GetProductUploadUrlsResponse) GetErrorMsg() *Error {
-	if x != nil {
-		return x.ErrorMsg
 	}
 	return nil
 }
@@ -1020,10 +1012,9 @@ const file_product_productservice_proto_rawDesc = "" +
 	"\bFileType\x18\x02 \x01(\tR\bFileType\x12\x1a\n" +
 	"\bFileSize\x18\x03 \x01(\x01R\bFileSize\"B\n" +
 	"\x1bGetProductUploadUrlsRequest\x12#\n" +
-	"\x05Files\x18\x01 \x03(\v2\r.ProductImageR\x05Files\"V\n" +
+	"\x05Files\x18\x01 \x03(\v2\r.ProductImageR\x05Files\"2\n" +
 	"\x1cGetProductUploadUrlsResponse\x12\x12\n" +
-	"\x04Urls\x18\x01 \x03(\tR\x04Urls\x12\"\n" +
-	"\bErrorMsg\x18\x02 \x01(\v2\x06.ErrorR\bErrorMsg2\xe6\x02\n" +
+	"\x04Urls\x18\x01 \x03(\tR\x04Urls2\xe6\x02\n" +
 	"\x0eProductService\x12:\n" +
 	"\rCreateProduct\x12\x15.CreateProductRequest\x1a\x10.ProductResponse\"\x00\x12:\n" +
 	"\rUpdateProduct\x12\x15.UpdateProductRequest\x1a\x10.ProductResponse\"\x00\x12@\n" +
@@ -1075,22 +1066,21 @@ var file_product_productservice_proto_depIdxs = []int32{
 	2,  // 7: ProductResponse.product:type_name -> Product
 	2,  // 8: SearchProductsResponse.products:type_name -> Product
 	9,  // 9: GetProductUploadUrlsRequest.Files:type_name -> ProductImage
-	0,  // 10: GetProductUploadUrlsResponse.ErrorMsg:type_name -> Error
-	3,  // 11: ProductService.CreateProduct:input_type -> CreateProductRequest
-	4,  // 12: ProductService.UpdateProduct:input_type -> UpdateProductRequest
-	5,  // 13: ProductService.DeleteProduct:input_type -> DeleteProductRequest
-	6,  // 14: ProductService.SearchProducts:input_type -> SearchProductsRequest
-	10, // 15: ProductService.GetProductUploadUrls:input_type -> GetProductUploadUrlsRequest
-	7,  // 16: ProductService.CreateProduct:output_type -> ProductResponse
-	7,  // 17: ProductService.UpdateProduct:output_type -> ProductResponse
-	17, // 18: ProductService.DeleteProduct:output_type -> google.protobuf.Empty
-	8,  // 19: ProductService.SearchProducts:output_type -> SearchProductsResponse
-	11, // 20: ProductService.GetProductUploadUrls:output_type -> GetProductUploadUrlsResponse
-	16, // [16:21] is the sub-list for method output_type
-	11, // [11:16] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	3,  // 10: ProductService.CreateProduct:input_type -> CreateProductRequest
+	4,  // 11: ProductService.UpdateProduct:input_type -> UpdateProductRequest
+	5,  // 12: ProductService.DeleteProduct:input_type -> DeleteProductRequest
+	6,  // 13: ProductService.SearchProducts:input_type -> SearchProductsRequest
+	10, // 14: ProductService.GetProductUploadUrls:input_type -> GetProductUploadUrlsRequest
+	7,  // 15: ProductService.CreateProduct:output_type -> ProductResponse
+	7,  // 16: ProductService.UpdateProduct:output_type -> ProductResponse
+	17, // 17: ProductService.DeleteProduct:output_type -> google.protobuf.Empty
+	8,  // 18: ProductService.SearchProducts:output_type -> SearchProductsResponse
+	11, // 19: ProductService.GetProductUploadUrls:output_type -> GetProductUploadUrlsResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_product_productservice_proto_init() }
