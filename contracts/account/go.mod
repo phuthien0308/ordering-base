@@ -1,8 +1,6 @@
 module github.com/phuthien0308/ordering-base/contracts/account
 
-go 1.25.5
-
-toolchain go1.25.8
+go 1.25.8
 
 require (
 	google.golang.org/grpc v1.81.1
@@ -10,6 +8,8 @@ require (
 )
 
 require (
+	go.opentelemetry.io/otel v1.44.0 // indirect
+	go.opentelemetry.io/otel/sdk/metric v1.44.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/sys v0.45.0 // indirect
 	golang.org/x/text v0.37.0 // indirect

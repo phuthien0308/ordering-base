@@ -10,6 +10,13 @@ service ProductService {
     rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse){}
     rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty){}
     rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse){}
+    rpc GetProductUploadUrls(GetProductUploadUrlsRequest) returns (GetProductUploadUrlsResponse){}
+}
+
+
+message Error {
+    string Message = 1;
+    int32 Code = 2;
 }
 
 message Audit {
@@ -89,4 +96,17 @@ message ProductResponse {
 message SearchProductsResponse {
     repeated Product products = 2;
     string next_page_token = 3;
+}
+
+message ProductImage {
+    string FileName = 1;
+    string FileType = 2;
+    double FileSize = 3;
+}
+message GetProductUploadUrlsRequest{
+    repeated ProductImage Files = 1;
+}
+message GetProductUploadUrlsResponse{
+    repeated string Urls = 1;
+    Error ErrorMsg = 2;
 }

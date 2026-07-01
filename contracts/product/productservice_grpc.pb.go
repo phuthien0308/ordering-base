@@ -20,10 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_CreateProduct_FullMethodName  = "/ProductService/CreateProduct"
-	ProductService_UpdateProduct_FullMethodName  = "/ProductService/UpdateProduct"
-	ProductService_DeleteProduct_FullMethodName  = "/ProductService/DeleteProduct"
-	ProductService_SearchProducts_FullMethodName = "/ProductService/SearchProducts"
+	ProductService_CreateProduct_FullMethodName        = "/ProductService/CreateProduct"
+	ProductService_UpdateProduct_FullMethodName        = "/ProductService/UpdateProduct"
+	ProductService_DeleteProduct_FullMethodName        = "/ProductService/DeleteProduct"
+	ProductService_SearchProducts_FullMethodName       = "/ProductService/SearchProducts"
+	ProductService_GetProductUploadUrls_FullMethodName = "/ProductService/GetProductUploadUrls"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -34,6 +35,7 @@ type ProductServiceClient interface {
 	UpdateProduct(ctx context.Context, in *UpdateProductRequest, opts ...grpc.CallOption) (*ProductResponse, error)
 	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SearchProducts(ctx context.Context, in *SearchProductsRequest, opts ...grpc.CallOption) (*SearchProductsResponse, error)
+	GetProductUploadUrls(ctx context.Context, in *GetProductUploadUrlsRequest, opts ...grpc.CallOption) (*GetProductUploadUrlsResponse, error)
 }
 
 type productServiceClient struct {
@@ -84,6 +86,16 @@ func (c *productServiceClient) SearchProducts(ctx context.Context, in *SearchPro
 	return out, nil
 }
 
+func (c *productServiceClient) GetProductUploadUrls(ctx context.Context, in *GetProductUploadUrlsRequest, opts ...grpc.CallOption) (*GetProductUploadUrlsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProductUploadUrlsResponse)
+	err := c.cc.Invoke(ctx, ProductService_GetProductUploadUrls_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
@@ -92,6 +104,7 @@ type ProductServiceServer interface {
 	UpdateProduct(context.Context, *UpdateProductRequest) (*ProductResponse, error)
 	DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error)
 	SearchProducts(context.Context, *SearchProductsRequest) (*SearchProductsResponse, error)
+	GetProductUploadUrls(context.Context, *GetProductUploadUrlsRequest) (*GetProductUploadUrlsResponse, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -113,6 +126,9 @@ func (UnimplementedProductServiceServer) DeleteProduct(context.Context, *DeleteP
 }
 func (UnimplementedProductServiceServer) SearchProducts(context.Context, *SearchProductsRequest) (*SearchProductsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchProducts not implemented")
+}
+func (UnimplementedProductServiceServer) GetProductUploadUrls(context.Context, *GetProductUploadUrlsRequest) (*GetProductUploadUrlsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductUploadUrls not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 func (UnimplementedProductServiceServer) testEmbeddedByValue()                        {}
@@ -207,6 +223,24 @@ func _ProductService_SearchProducts_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_GetProductUploadUrls_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductUploadUrlsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).GetProductUploadUrls(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_GetProductUploadUrls_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).GetProductUploadUrls(ctx, req.(*GetProductUploadUrlsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -229,6 +263,10 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchProducts",
 			Handler:    _ProductService_SearchProducts_Handler,
+		},
+		{
+			MethodName: "GetProductUploadUrls",
+			Handler:    _ProductService_GetProductUploadUrls_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
